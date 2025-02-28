@@ -8,6 +8,7 @@ use App\Http\Controllers\RegistrationController;
 // });
 
 Route::post('/registration', [RegistrationController::class, 'store']);
+Route::get('/recipients-data', [RegistrationController::class, 'index']);
 
 Route::get('/{any}', function () {
     return view('welcome'); // Renders Vue app

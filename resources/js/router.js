@@ -12,6 +12,8 @@ import visualizationMap from "../js/components/dashboard/visualizationMap/form.v
 import contactUs from "../js/components/contactUs/form.vue";
 import aboutUs from "../js/components/aboutUs/form.vue";
 
+import recipientsData from "../js/components/settings/recipientsData/form.vue";
+
 const routes = [
    {
     path: '/',
@@ -57,6 +59,11 @@ const routes = [
     path: '/about-us',
     name: 'About Us',
     component: aboutUs
+   },
+   {
+    path: '/recipients-data',
+    name: 'Recipients Data',
+    component: recipientsData
    },
 ];
 
