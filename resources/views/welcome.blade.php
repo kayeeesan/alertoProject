@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel + Vuetify</title>
+    <title>Alerto</title>
     @vite(['resources/js/app.js'])
 </head>
 <body>
