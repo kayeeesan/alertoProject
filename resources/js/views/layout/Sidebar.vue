@@ -1,3 +1,39 @@
+<script setup>
+import { defineProps, defineEmits } from "vue";
+
+const props = defineProps(["drawer"]);
+const emit = defineEmits();
+
+const toggleDrawer = (val) => {
+  emit("update:drawer", val);
+};
+
+  // Dashboard items
+  const itemsInDashboard = [
+    { title: "River Status", icon: "mdi-wave", route: "/river-status" },
+    { title: "Weather Updates", icon: "mdi-weather-cloudy", route: "/weather-updates" },
+    { title: "AdZU Weather Station", icon: "mdi-weather-sunny", route: "/adzu-weather" },
+    { title: "Earthquake Bulletin", icon: "mdi-earth", route: "/earthquake-monitoring" },
+    { title: "Visualization Map", icon: "mdi-map", route: "/visualization-map" },
+    { title: "Historical Data Extraction", icon: "mdi-database", route: "/history-data-extraction" },
+  ];
+  
+  // Other menu items
+  const items = [
+    { title: "About Us", icon: "mdi-information", route: "/about-us" },
+    { title: "Contact Us", icon: "mdi-phone", route: "/contact-us" }
+  ];
+  
+  // Libraries
+  const libraries = [
+    { title: "Role", route: "" },
+    { title: "Accounts", route: "" },
+    { title: "Establishments", route: "" },
+    { title: "Staffs", route: "" },
+    { title: "Requirement", route: "" },
+  ];
+</script>
+
 <template>
   <v-navigation-drawer
     :model-value="drawer"
@@ -75,38 +111,3 @@
   </v-navigation-drawer>
 </template>
 
-<script setup>
-import { defineProps, defineEmits } from "vue";
-
-const props = defineProps(["drawer"]);
-const emit = defineEmits();
-
-const toggleDrawer = (val) => {
-  emit("update:drawer", val);
-};
-
-  // Dashboard items
-  const itemsInDashboard = [
-    { title: "River Status", icon: "mdi-wave", route: "/river-status" },
-    { title: "Weather Updates", icon: "mdi-weather-cloudy", route: "/weather-updates" },
-    { title: "AdZU Weather Station", icon: "mdi-weather-sunny", route: "/adZU-weather-station" },
-    { title: "Earthquake Bulletin", icon: "mdi-earth", route: "/earthquake-monitoring" },
-    { title: "Visualization Map", icon: "mdi-map", route: "/visualization-map" },
-    { title: "Historical Data Extraction", icon: "mdi-database", route: "/historical-data-extraction" },
-  ];
-  
-  // Other menu items
-  const items = [
-    { title: "About Us", icon: "mdi-information", route: "/about-us" },
-    { title: "Contact Us", icon: "mdi-phone", route: "/contact-us" }
-  ];
-  
-  // Libraries
-  const libraries = [
-    { title: "Role", route: "/roles" },
-    { title: "Accounts", route: "/registered-accounts" },
-    { title: "Establishments", route: "/establishments" },
-    { title: "Staffs", route: "/staffs" },
-    { title: "Requirement", route: "/requirements" },
-  ];
-</script>
