@@ -1,8 +1,13 @@
 <template>
     <v-col cols="12" class="p-10 ">
-      <v-sheet class="p-6 rounded-lg shadow-md border border-gray-300 relative" style="background:  #F8FAF0;">
+      <v-sheet
+      class="pa-8 rounded-lg shadow-lg"
+      style="position: relative; background: #F8FAF0; border: 1px solid #E0E0E0;"
+    >
         <!-- Top Bar -->
-        <span class="absolute left-0 right-0 top-0 h-2  rounded-t-lg" style="background: var(--primary-color);"></span>
+        <span
+        style="background: var(--primary-color); position: absolute; left: 0; right: 0; top: 0; border-top-left-radius: 11px; border-top-right-radius: 11px; height: 8px;"
+      ></span>
         
         <v-row class="mt-5 ml-5">
           <v-col cols="5">

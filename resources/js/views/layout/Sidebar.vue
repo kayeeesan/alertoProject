@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+// import { defineProps, defineEmits } from "vue";
 
 const props = defineProps(["drawer"]);
 const emit = defineEmits();
@@ -26,11 +26,16 @@ const toggleDrawer = (val) => {
   
   // Libraries
   const libraries = [
-    { title: "Role", route: "" },
-    { title: "Accounts", route: "" },
-    { title: "Establishments", route: "" },
-    { title: "Staffs", route: "" },
-    { title: "Requirement", route: "" },
+    { title: "General Actions",icon: "mdi-cog",  route: "" },
+    { title: "Threshold",icon: "mdi-arrow-split-horizontal",  route: "" },
+    { title: "Municipality", icon: "mdi-city",  route: "" },
+    { title: "Rivers", icon: "mdi-waves",  route: "" },
+    { title: "Sensors under ALerTO", icon: "mdi-signal-variant",  route: "" },
+    { title: "Sensors in PH", icon: "mdi-signal-variant",  route: "" },
+    { title: "Mobile Prefix", icon: "mdi-cellphone",  route: "" },
+    { title: "Recipients Data", icon: "mdi-account-circle-outline",  route: "/recipients-data" },
+    { title: "User Restrictions", icon: "mdi-account-cog",  route: "" },
+
   ];
 </script>
 
@@ -103,7 +108,7 @@ const toggleDrawer = (val) => {
             class="sidebar-subitem"
             link
           >
-            <v-icon class="sidebar-icon mr-3" style="background: #001A6E; color: #fff; height: 40px; width: 40px; border-radius: 99px;">mdi-book</v-icon>
+            <v-icon class="sidebar-icon mr-3" style="background: #001A6E; color: #fff; height: 40px; width: 40px; border-radius: 99px;">{{ item.icon }}</v-icon>
             <span class="sidebar-text" style="color: white;">{{ item.title }}</span>
           </v-list-item>
         </v-list-group>
