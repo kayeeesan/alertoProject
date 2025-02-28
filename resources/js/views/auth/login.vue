@@ -1,127 +1,172 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from "vue";
+import useRegistration from "../../composable/registration";
+
+const { storeRegistration } = useRegistration();
+const emit = defineEmits(["reloadRegistration", "input"]);
 
 const container = ref(null);
 
 const toggleActive = () => {
   container.value.classList.toggle('active');
 };
+
+const form = reactive({
+  id: null,
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
+  mobile_number: "",
+  position: "",
+  government_agency: "",
+  region: "",
+  province: "",
+  city: "",
+  riverbasin_assigned: "",
+  lgu_fb: ""
+});
+
+const preloader = ref(false);
+const is_error = ref(false);
+
+
+const saveRegistration = async () => {
+  let formData = new FormData();
+  Object.keys(form).forEach((key) => {
+    formData.append(key, form[key] || "");
+  });
+
+  if (!is_error.value) {
+    preloader.value = true;
+    await storeRegistration(formData);
+    preloader.value = false;
+  }
+};
 </script>
 
 <template>
-  <div ref="container" class="container">
-    <div class="form-box login">
-      <form @submit.prevent="">
-        <h1>Login</h1>
-        <div class="input-box">
-          <input type="text" placeholder="Username" />
-        </div>
-        <div class="input-box">
-          <input type="password" placeholder="Password" />
-        </div>
-        <div class="forgot-link">
-          <a href="#">Forgot password?</a>
-        </div>
-        <button type="submit" class="btn">Login</button>
-      </form>
-    </div>
-    <div class="form-box register">
-      <form @submit.prevent="">
-        <h1>Register</h1>
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="First Name" />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Last Name" />
-            </div>
-          </v-col>
-        </v-row>
-       
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Email Address" />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="Password" placeholder="Password" />
-            </div>
-          </v-col>
-        </v-row>
+		<div ref="container" class="container">
+			<div class="form-box login">
+			<form @submit.prevent="">
+				<h1>Login</h1>
+				<div class="input-box">
+				<input type="text" placeholder="Username" />
+				</div>
+				<div class="input-box">
+				<input type="password" placeholder="Password" />
+				</div>
+				<div class="forgot-link">
+				<a href="#">Forgot password?</a>
+				</div>
+				<button type="submit" class="btn">Login</button>
+			</form>
+			</div>
+			<div class="form-box register">
+			<form @submit.prevent="saveRegistration">
+				<h1>Member Register</h1>
 
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Mobile No." />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Position/Role" />
-            </div>
-          </v-col>
-        </v-row>
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Firstname" v-model="form.first_name" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Lastname" v-model="form.last_name" required />
+					</div>
+				</v-col>
+				</v-row>
+			
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="email" placeholder="Official Email Address" v-model="form.email" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="password" placeholder="password" v-model="form.password" required />
+					</div>
+				</v-col>
+				</v-row>
 
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Government Agency" />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Region" />
-            </div>
-          </v-col>
-        </v-row>
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Official Mobile Number" v-model="form.mobile_number" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Position/Role" v-model="form.position" required />
+					</div>
+				</v-col>
+				</v-row>
 
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Province" />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="City" />
-            </div>
-          </v-col>
-        </v-row>
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Government Agency" v-model="form.government_agency" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Region" v-model="form.region" required />
+					</div>
+				</v-col>
+				</v-row>
 
-        <v-row class="ml-1">
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="Riverbasin Assigned" />
-            </div>
-          </v-col>
-          <v-col style="padding: 0 !important;">
-            <div class="input-box mr-2">
-              <input type="text" placeholder="LGU Facebook (if any)" />
-            </div>
-          </v-col>
-        </v-row>
-        <button type="submit" class="btn mt-10">Register</button>
-      </form>
-    </div>
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Province" v-model="form.province" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="City/Municipality" v-model="form.city" required />
+					</div>
+				</v-col>
+				</v-row>
 
-    <div class="toggle-box">
-      <div class="toggle-panel toggle-left">
-        <h1>No Account?</h1>
-        <button class="btn" @click="toggleActive">Register</button>
-      </div>
-      <div class="toggle-panel toggle-right">
-        <h1>Already have an account?</h1>
-        <button class="btn" @click="toggleActive">Login</button>
-      </div>
-    </div>
-  </div>
+				<v-row class="ml-1">
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="Riverbasin Assigned" v-model="form.riverbasin_assigned" required />
+					</div>
+				</v-col>
+				<v-col style="padding: 0 !important;">
+					<div class="input-box mr-2">
+						<input type="text" placeholder="LGU Facebook Page (if any)" v-model="form.lgu_fb" />
+					</div>
+				</v-col>
+				</v-row>
+				<button type="submit" class="btn mt-10">Registerr</button>
+			</form>
+			
+			</div>
+			
+
+			<div class="toggle-box">
+			<div class="toggle-panel toggle-left">
+				<h1>No Account?</h1>
+				<button class="btn" @click="toggleActive">Register</button>
+			</div>
+			<div class="toggle-panel toggle-right">
+				<h1>Already have an account?</h1>
+				<button class="btn" @click="toggleActive">Login</button>
+			</div>
+			</div>
+		</div>
+	
+
 </template>
+
+
 <style scoped>
+
 	body{
 		margin: 0;
 		padding: 0;

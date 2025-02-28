@@ -1,3 +1,7 @@
 :root {
     --primary-color: #155E95;
 }
+
+.swal2-container {
+  z-index: 20000 !important;
+}

@@ -8,6 +8,9 @@ import * as directives from 'vuetify/directives'; // Import Vuetify directives
 import router from './router'; // Import router
 import '@mdi/font/css/materialdesignicons.css';
 import '../css/main.css';
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+
 
 const vuetify = createVuetify({
     components,
