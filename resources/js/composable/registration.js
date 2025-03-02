@@ -21,8 +21,7 @@ export default function useRegistration() {
         is_loading.value = true;
 
         let query_str = { ...query.value, ...params};
-        let url = type == "registeredAccount" ? "registeredAccounts" : "/registered-accounts";
-        // let url = "/registered-accounts";
+        let url = type == "recipientsData" ? "/recipients-data" : "/recipients-data";
         await axios 
             .get(`${url}?page=${query.value.page}`, {params: query_str})
             .then((response) => {

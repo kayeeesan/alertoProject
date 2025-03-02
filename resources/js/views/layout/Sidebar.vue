@@ -113,6 +113,24 @@ const toggleDrawer = (val) => {
           </v-list-item>
         </v-list-group>
       </v-list>
+
+      <v-footer class="d-flex flex-column align-center" style="background: #001A6E; padding: 10px; color: white;">
+      <p class="text-center mb-2">Partners: Region 9</p>
+      <v-row class="d-flex justify-center" no-gutters>
+        <v-col cols="3" class="d-flex justify-center">
+          <img src="https://rdrrmc9-alerto.com/assets/images/partners/rdrrmc9.png" height="40" contain alt="">
+        </v-col>
+        <v-col cols="3" class="d-flex justify-center">
+          <img src="https://rdrrmc9-alerto.com/assets/images/partners/ocd.png" height="40" contain alt="">
+        </v-col>
+        <v-col cols="3" class="d-flex justify-center">
+          <img src="https://rdrrmc9-alerto.com/assets/images/partners/dost9.png" height="40" contain alt="">
+        </v-col>
+        <v-col cols="3" class="d-flex justify-center">
+          <img src="https://rdrrmc9-alerto.com/assets/images/partners/dilg.png" height="40" contain alt="">
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-navigation-drawer>
 </template>
 
