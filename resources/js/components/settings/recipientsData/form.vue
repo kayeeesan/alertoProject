@@ -1,105 +1,136 @@
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
+<script setup>
+import { reactive, watch, ref } from "vue";
 import useRegistration from "../../../composable/registration";
-// import RegisteredAccountsForm from "../../../components/settings/registeredAccounts/form.vue";
 
-const { registrations, pagination, query, is_loading, getRegisteredAccounts } = useRegistration();
-const registeredAccount = ref({});
-// const show_form_modal = ref(false);
+const { errors, is_success, storeRegistration } = useRegistration();
+const emit = defineEmits(["reloadRegisteredAccounts", "input"]);
 
-const headers = [
-    { title: "First Name", key: "first_name" },
-    { title: "Email", key: "email" },
-    { title: "Position", key: "position" },
-    { title: "", key: "actions", sortable: false }
-];
-
-onMounted(() => {
-    reloadRegisteredAccounts();
+const props = defineProps({
+    registeredAccount: {
+        type: Object,
+        default: null,
+    },
+    value: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const reloadRegisteredAccounts = async () => {
-    await getRegisteredAccounts();
-    registeredAccount.value = {};
+const show_form_modal = ref(false);
+watch(
+    () => props.value,
+    (value) => {
+        show_form_modal.value = value;
+    }
+);
+
+const form = reactive({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "123456",  // Default password
+    position: "",
+    mobile_number: "",
+    government_agency: "",
+    region: "",
+    province: "",
+    city: "",
+    riverbasin_assigned: ""
+});
+
+
+const saveRegisteredAccount = async () => {
+    const response = await storeRegistration(form);
+
+    if (is_success.value) {
+        emit("reloadRegisteredAccounts");
+        emit("input", false);
+        resetForm();
+    }
 };
 
-// const updateRegisteredAccount = (row) => {
-//     registeredAccount.value = row;
-//     show_form_modal.value = true;
-// };
+const resetForm = () => {
+    Object.assign(form, {
+        first_name: "",
+        last_name: "",
+        email: "",
+        position: "",
+        mobile_number: "",
+        government_agency: "",
+        region: "",
+        province: "",
+        city: "",
+        riverbasin_assigned: ""
+    });
+};
 
-// const showRegisteredAccountsForm = (is_show) => {
-//     registeredAccount.value = {};
-//     show_form_modal.value = is_show;
-// };
+const closeDialog = () => {
+    resetForm();
+    emit("input", false);
+};
 </script>
 
 <template>
-    <div style="text-align: end" class="mt-20">
-        <v-btn class="ma-2" color="blue-darken-1" @click="showRegisteredAccountsForm(true)">
-            <v-icon start icon="mdi-plus"></v-icon>
-            Accounts
-        </v-btn>
-    </div>
-    <v-card>
-        <div class="overflow-hidden overflow-x-auto min-w-full align-middle sm:rounded-md">
-            <v-card-title>List of Accounts</v-card-title>
-            <v-divider class="mx-4 mb-1"></v-divider>
+    <v-dialog v-model="show_form_modal" width="1000" scrollable persistent>
+        <v-card>
             <v-card-title>
-                <v-text-field
-                    v-model="query.search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+                <span class="text-h5">New Account</span>
             </v-card-title>
+            <v-card-text>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.first_name" label="First Name*" :error-messages="errors['first_name'] || []"></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.last_name" label="Last Name*" :error-messages="errors['last_name'] || []"></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="12">
+                        <v-text-field v-model="form.email" label="Email"></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.position" label="Position"></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.mobile_number" label="Mobile No."></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="12">
+                        <v-text-field v-model="form.government_agency" label="Government Agency"></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.region" label="Region"></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.province" label="Province"></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.city" label="City"></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field v-model="form.riverbasin_assigned" label="Riverbasin Assigned"></v-text-field>
+                    </v-col>
+                </v-row>
 
-            <v-data-table
-                :items="registrations"
-                :loading="is_loading"
-                loading-text="Loading... Please wait"
-                :headers="headers"
-            >
-                <template v-slot:item.actions="{ item }">
-                    <v-menu open-on-hover>
-                        <template v-slot:activator="{ props }">
-                            <v-btn color="#BDBDBD" v-bind="props" size="small">
-                                Action
-                                <v-icon end icon="mdi-dots-vertical"></v-icon>
-                            </v-btn>
-                        </template>
-                        <v-list max-width="200px" class="p-2">
-                            <div width="100%">
-                                <v-btn
-                                    width="100%"
-                                    color="green"
-                                    size="small"
-                                    @click="updateRegisteredAccount(item.raw)"
-                                >
-                                    Edit
-                                    <v-icon end icon="mdi-pencil"></v-icon>
-                                </v-btn>
-                                <v-btn width="100%" class="mt-2" color="red" size="small">
-                                    Delete
-                                    <v-icon end icon="mdi-delete"></v-icon>
-                                </v-btn>
-                            </div>
-                        </v-list>
-                    </v-menu>
-                </template>
-            </v-data-table>
+                <v-spacer></v-spacer>
 
-            <p v-if="pagination" class="p-5">
-                Showing {{ pagination.from }} to {{ pagination.to }} of {{ pagination.total }} records
-            </p>
-        </div>
-    </v-card>
-
-    <!-- <RegisteredAccountsForm
-        :value="show_form_modal"
-        :registeredAccount="registeredAccount"
-        @reloadRegisteredAccounts="reloadRegisteredAccounts"
-        @input="showRegisteredAccountsForm"
-    /> -->
+                <v-btn class="ma-2" color="blue-grey-lighten-1" @click="closeDialog">
+                    <v-icon start icon="mdi-minus-circle"></v-icon>
+                    Cancel
+                </v-btn>
+                <v-btn class="ma-2" color="blue-darken-1" @click="saveRegisteredAccount">
+                    Save
+                    <v-icon end icon="mdi-checkbox-marked-circle"></v-icon>
+                </v-btn>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
 </template>

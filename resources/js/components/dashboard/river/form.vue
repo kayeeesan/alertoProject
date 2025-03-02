@@ -14,13 +14,13 @@ const texts = ref(['lorem', 'lorem', 'lorem']);
     <v-container fluid class="px-4 py-8">
         <v-row>
             <!-- Left Column -->
-            <v-col cols="12" lg="6" >
+            <v-col cols="12" lg="7" >
                 <thresholdDetails />
                
             </v-col>
 
             <!-- Right Column -->
-            <v-col cols="12" lg="6">
+            <v-col cols="12" lg="5 ">
                  <totalSensors />
             </v-col>
         </v-row>
