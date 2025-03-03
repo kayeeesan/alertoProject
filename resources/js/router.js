@@ -14,6 +14,9 @@ import aboutUs from "../js/components/aboutUs/form.vue";
 
 import recipientsData from "../js/views/settings/recipientsData.vue";
 
+import Rivers from "../js/views/settings/rivers.vue";
+import Municipalities from "../js/views/settings/municipality.vue";
+
 const routes = [
    {
     name: 'dashboard',
@@ -75,6 +78,17 @@ const routes = [
     name: 'Recipients Data',
     component: recipientsData
    },
+   {
+    name: 'rivers',
+    path: '/rivers',
+    name: 'Rivers',
+    component: Rivers
+   },
+   {
+    path: '/municipalities',
+    name: 'Municipalities',
+    component: Municipalities
+   }
 ];
 
 const router = createRouter({

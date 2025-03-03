@@ -28,8 +28,8 @@ const toggleDrawer = (val) => {
   const libraries = [
     { title: "General Actions",icon: "mdi-cog",  route: "" },
     { title: "Threshold",icon: "mdi-arrow-split-horizontal",  route: "" },
-    { title: "Municipality", icon: "mdi-city",  route: "" },
-    { title: "Rivers", icon: "mdi-waves",  route: "" },
+    { title: "Municipality", icon: "mdi-city",  route: "/municipalities" },
+    { title: "Rivers", icon: "mdi-waves",  route: "/rivers" },
     { title: "Sensors under ALerTO", icon: "mdi-signal-variant",  route: "" },
     { title: "Sensors in PH", icon: "mdi-signal-variant",  route: "" },
     { title: "Mobile Prefix", icon: "mdi-cellphone",  route: "" },
