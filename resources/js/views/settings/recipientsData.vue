@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import useRegistration from "../../composable/registration";
-// import RegisteredAccountsForm from "../../../components/settings/registeredAccounts/form.vue";
+import RegisteredAccountsForm from "../../components/settings/recipientsData/form.vue";
 
 const { registrations, pagination, query, is_loading, getRegisteredAccounts } = useRegistration();
 const registeredAccount = ref({});
-// const show_form_modal = ref(false);
+const show_form_modal = ref(false);
 
 const headers = [
     { title: "First Name", key: "first_name" },
@@ -25,15 +25,12 @@ const reloadRegisteredAccounts = async () => {
     registeredAccount.value = {};
 };
 
-// const updateRegisteredAccount = (row) => {
-//     registeredAccount.value = row;
-//     show_form_modal.value = true;
-// };
 
-// const showRegisteredAccountsForm = (is_show) => {
-//     registeredAccount.value = {};
-//     show_form_modal.value = is_show;
-// };
+
+const showRegisteredAccountsForm = (is_show) => {
+    registeredAccount.value = {};
+    show_form_modal.value = is_show;
+};
 </script>
 
 <template>
@@ -62,6 +59,7 @@ const reloadRegisteredAccounts = async () => {
                 :loading="is_loading"
                 loading-text="Loading... Please wait"
                 :headers="headers"
+                :search="query.search"
             >
                 <template v-slot:item.actions="{ item }">
                     <v-menu open-on-hover>
@@ -98,10 +96,10 @@ const reloadRegisteredAccounts = async () => {
         </div>
     </v-card>
 
-    <!-- <RegisteredAccountsForm
+    <RegisteredAccountsForm
         :value="show_form_modal"
         :registeredAccount="registeredAccount"
         @reloadRegisteredAccounts="reloadRegisteredAccounts"
         @input="showRegisteredAccountsForm"
-    /> -->
+    />
 </template>
