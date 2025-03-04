@@ -37,4 +37,19 @@ class RiverController extends Controller
         return ResourcesRiver::collection($query->paginate(10));
     }
     
+    public function destroy($id)
+    {
+        try {
+            $river = River::findOrFail($id);
+            $river->delete();
+            return response(['message' => 'River has been successfully deleted'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function update()
+    {
+     
+    }
 }

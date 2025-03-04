@@ -33,6 +33,8 @@ const showRiverForm = async (is_show) => {
     river.value = {};
     show_form_modal.value = is_show;
 };
+
+
 </script>
 <template>
     <div style="text-align: end">
@@ -82,15 +84,11 @@ const showRiverForm = async (is_show) => {
                                     Edit
                                     <v-icon end icon="mdi-pencil"></v-icon>
                                 </v-btn>
-                                <v-btn
-                                    width="100%"
-                                    class="mt-2"
-                                    color="red"
-                                    size="small"
-                                >
+                                <v-btn width="100%" class="mt-2" color="red" size="small" @click="destroyRiver(item.id)">
                                     Delete
                                     <v-icon end icon="mdi-delete"></v-icon>
                                 </v-btn>
+
                             </div>
                         </v-list>
                     </v-menu> </template

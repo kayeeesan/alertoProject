@@ -29,12 +29,6 @@ export default function useRivers() {
             });
     };
 
-    const getRiver = async (id) => {
-        let response = await axios.get(`/rivers/${id}`);
-        river.value = response.data;
-        is_loading.value = false;
-    };
-
     const storeRiver = async (data) => {
         is_loading.value = true;
         errors.value = "";
@@ -58,6 +52,32 @@ export default function useRivers() {
         }
     };
 
+    const destroyRiver = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axios.delete(`/rivers/${id}`);
+                    Swal.fire("Deleted!", "The river has been deleted.", "success");
+                    await getRivers(); // Refresh the list after deletion
+                } catch (error) {
+                    Swal.fire("Error!", "Failed to delete the river.", "error");
+                }
+            }
+        });
+    };
+
+    const updateRiver = async () => {
+       
+    };
+
  
  
     return {
@@ -69,7 +89,8 @@ export default function useRivers() {
         river,
         rivers,
         getRivers,
-        getRiver,
         storeRiver,
+        destroyRiver,
+        updateRiver
     };
 }
