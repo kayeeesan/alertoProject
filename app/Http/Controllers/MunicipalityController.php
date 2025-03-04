@@ -53,4 +53,14 @@ class MunicipalityController extends Controller
              return response()->json(['message' => $e->getMessage()]);
          }
      }
+
+     public function destroy($id){
+        try {
+            $municipality = Municipality::findOrFail($id);
+            $municipality->delete();
+            return response(['message' => 'Municipality has been successfully deleted'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+     }
 }

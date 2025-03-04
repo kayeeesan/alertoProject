@@ -58,6 +58,28 @@ export default function useMunicipalities() {
         }
     };
 
+    const destroyMunicipality = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axios.delete(`/municipalities/${id}`);
+                    Swal.fire("Deleted!", "The Municipality has been deleted.", "success");
+                    await getMunicipalities(); // Refresh the list after deletion
+                } catch (error) {
+                    Swal.fire("Error!", "Failed to delete the Municipality.", "error");
+                }
+            }
+        });
+    };
+
  
  
     return {
@@ -71,5 +93,6 @@ export default function useMunicipalities() {
         getMunicipalities,
         getMunicipality,
         storeMunicipality,
+        destroyMunicipality
     };
 }

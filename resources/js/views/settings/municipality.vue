@@ -86,6 +86,7 @@ const showMunicipalityForm = async (is_show) => {
                                     class="mt-2"
                                     color="red"
                                     size="small"
+                                    @click="destroyMunicipality(item.id)"
                                 >
                                     Delete
                                     <v-icon end icon="mdi-delete"></v-icon>
