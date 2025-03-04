@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" class="p-0">
-    <v-sheet class="pa-6 rounded-lg shadow-md forecast-container">
+    <v-sheet class="pa-6 rounded-lg shadow-md forecast-container elevation-3">
       <span class="header-bar"></span>
       
       <div class="forecast-header">

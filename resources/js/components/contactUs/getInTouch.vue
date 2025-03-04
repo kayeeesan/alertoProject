@@ -1,7 +1,7 @@
 <template>
     <v-col cols="12" class="p-10 ">
       <v-sheet
-      class="pa-8 rounded-lg shadow-lg"
+      class="pa-8 rounded-lg shadow-lg elevation-3"
       style="position: relative; background: #F8FAF0; border: 1px solid #E0E0E0;"
     >
         <!-- Top Bar -->
@@ -11,14 +11,6 @@
         
         <v-row class="mt-5 ml-5">
           <v-col cols="5">
-            <!-- <v-row>
-                <v-row>
-                    <v-img
-                    style="height: 120px;"
-                    src="https://rdrrmc9-alerto.com/assets/images/logo3.png"
-                    ></v-img>
-                </v-row>
-            </v-row> -->
             <v-row class="d-flex flex-column  text-center">
                 <v-img
                     style="height: 120px;"
