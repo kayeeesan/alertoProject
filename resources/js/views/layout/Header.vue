@@ -29,7 +29,7 @@ const isDialogActive = ref(false);
             v-bind="props"
             text="Log in"
             class="text-none mr-2"
-            color="teal-accent-2"
+            color="white"
             rounded="4"
             variant="outlined"
           ></v-btn>
@@ -41,7 +41,7 @@ const isDialogActive = ref(false);
     
     <v-btn
       class="text-none mr-5"
-      color="teal-accent-2"
+      color="white"
       rounded="4"
       variant="flat"
     >

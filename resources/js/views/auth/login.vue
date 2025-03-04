@@ -49,6 +49,9 @@ const saveRegistration = async () => {
 		<div ref="container" class="container">
 			<div class="form-box login">
 			<form @submit.prevent="">
+				<div class="d-flex justify-center mb-5">
+					<v-img src="https://rdrrmc9-alerto.com/assets/images/logo3.png" width="150" height="120"></v-img>
+				</div>
 				<h1>Login</h1>
 				<div class="input-box">
 				<input type="text" placeholder="Username" />
@@ -186,11 +189,11 @@ const saveRegistration = async () => {
 		overflow: hidden;
 	}
   .input-box input{
-    padding: 5px;
+    padding: 13px;
     border-radius: 11px;
     width: 100%;
     margin-top: 20px;
-    background: rgb(204, 201, 201);
+    background: rgb(224, 224, 224);
   }
 	.form-box{
 		position: absolute;

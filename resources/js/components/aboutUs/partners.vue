@@ -39,7 +39,6 @@ const partners = [
 
 <style scoped>
 .v-container {
-  max-width: 900px;
   margin: auto;
 }
 </style>

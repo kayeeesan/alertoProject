@@ -1,7 +1,7 @@
-<template>
-  <v-col cols="12" class="p-0">
+<template> 
+  <v-col cols="12" class="p-0 ">
     <v-sheet
-      class="pa-8 rounded-lg shadow-lg"
+      class="pa-8 rounded-lg shadow-lg elevation-3"
       style="position: relative; background: #F8FAF0; border: 1px solid #E0E0E0;"
     >
       <!-- Top Bar Section -->
